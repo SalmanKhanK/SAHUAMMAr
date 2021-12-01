@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Liver</h1>
+    <div>
+    <form method="post" accept-charset="utf-8" name="Modelform">
+        <div class="col-md-10 form-group" >
+            <label><b>Enter Age:</b> </label><br>
+            <input type="number" class="form-control" id="age" name="age"
+                   placeholder="Enter Age ">
+        </div>
+        <!-- Gender -->
+        <div class="col-md-10 form-group" >
+            <label><b>Enter Gender</b> </label><br>
+            <select class="selectpicker form-control" id="gender" name="gender" required="1"
+            >
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+            </select>
+        </div>
+        <!-- Bilirubin -->
+          <!-- onchange="load_car_models(this.id,'car_models')" -->
+        <div class="col-md-10 form-group" >
+            <label><b>Select the bilirubin:</b> </label><br>
+            <select class="selectpicker form-control" id="totalBilirubin" name="totalBilirubin" required="1"
+            >
+                {% for bilirubin in totalBilirubin %}
+                <option value="{{ bilirubin }}">{{ bilirubin }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!-- 	Direct_Bilirubin -->
+        <div class="col-md-10 form-group" >
+            <label><b>Select the direct_Bilirubin:</b> </label><br>
+            <select class="selectpicker form-control" id="Direct_Bilirubin" name="Direct_Bilirubin" required="1"
+            >
+                {% for directbilirubin in direct_Bilirubin %}
+                <option value="{{ directbilirubin }}">{{ directbilirubin }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!-- alkaline_Phosphotase -->
+        <div class="col-md-10 form-group" >
+            <label><b>Select the alkaline_Phosphotase:</b> </label><br>
+            <select class="selectpicker form-control" id="alkaline_Phosphotase" name="alkaline_Phosphotase" required="1"
+            >
+                {% for alkalinephosphotas in alkaline_Phosphotase %}
+                <option value="{{ alkalinephosphotas }}">{{ alkalinephosphotas }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-10 form-group" >
+            <label><b>Select the alamine_Aminotransferase:</b> </label><br>
+            <select class="selectpicker form-control" id="alamine_Aminotransferase" name="alamine_Aminotransferase" required="1"
+            >
+                {% for alamineaminotransferase in alamine_Aminotransferase %}
+                <option value="{{ alamineaminotransferase }}">{{ alamineaminotransferase }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!-- aspartate_Aminotransferase -->
+        <div class="col-md-10 form-group" >
+            <label><b>Select the aspartate_Aminotransferase:</b> </label><br>
+            <select class="selectpicker form-control" id="aspartate_Aminotransferase" name="aspartate_Aminotransferase" required="1"
+            >
+                {% for aspartateaminotransferase in aspartate_Aminotransferase %}
+                <option value="{{ aspartateaminotransferase }}">{{ aspartateaminotransferase }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!-- total_Protiens -->
+        <div class="col-md-10 form-group" >
+            <label><b>Select the total_Protiens:</b> </label><br>
+            <select class="selectpicker form-control" id="total_Protiens" name="total_Protiens" required="1"
+            >
+                {% for totalprotiens in total_Protiens %}
+                <option value="{{ totalprotiens }}">{{ totalprotiens }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!-- albumin -->
+        <div class="col-md-10 form-group" >
+            <label><b>Select the albumin:</b> </label><br>
+            <select class="selectpicker form-control" id="albumin" name="albumin" required="1"
+            >
+                {% for album in albumin %}
+                <option value="{{ album }}">{{ album }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-10 form-group" >
+            <label><b>Select the albumin_and_Globulin_Ratio:</b> </label><br>
+            <select class="selectpicker form-control" id="albumin_and_Globulin_Ratio" name="albumin_and_Globulin_Ratio" required="1"
+            >
+                {% for albuminAndGlobulinRatio in albumin_and_Globulin_Ratio %}
+                <option value="{{ albuminAndGlobulinRatio }}">{{ albuminAndGlobulinRatio }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-10 form-group" style="text-align: center">
+            <button  class="btn btn-primary form-control" onclick="send_data()" >Predict Price</button>
+        </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-12" style="text-align: center">
+            <h4><span id="prediction"></span></h4>
+        </div>
+    </div>
+</div>
+    <script>
+           function form_handler(event) {
+        event.preventDefault(); // Don't submit the form normally
+           }
+       function send_data(){
+        var form = document.querySelector('form').addEventListener("submit",form_handler);
+        console.log(form,"form")
+        var fd=new FormData(document.querySelector('form'));
+
+         var xhr= new XMLHttpRequest({mozSystem: true});
+
+        xhr.open('POST','/getData',true);
+        document.getElementById('prediction').innerHTML="Wait! Prediction.....";
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == XMLHttpRequest.DONE){
+                document.getElementById('prediction').innerHTML="Prediction:"+xhr.responseText;
+
+            }
+        };
+        xhr.onload= function(){};
+        xhr.send(fd);
+       }
+    </script>
+</body>
+</html>
