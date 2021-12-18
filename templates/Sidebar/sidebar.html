@@ -1,0 +1,44 @@
+{% extends './Home/home.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/style/sidebar.css">  
+    <title></title>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Welcome</h3>
+            </div>
+
+            <ul class="sidebarLinkStyle">
+                <p>Health Care</p>
+                <hr style="width: 75%;">
+                <li >
+                    <a href="/profile" style="color: white;text-decoration: none;">Liver</a>
+                </li>
+                <li >
+                    <a href="/heart" style="color: white;list-style: none;">Heart</a>
+                </li>
+                <li >
+                    <a href="/breast" style="color: white;list-style: none;">Breast</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            {% block predictform %} {% endblock %} 
+            {% block Breastform %} {% endblock %} 
+            {% block HeartPredict %} {% endblock %}           
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -5,10 +5,26 @@ import joblib
 app = Flask(__name__)
 liver = pd.read_csv("indian_liver_patient.csv")
 model=joblib.load(open('liver-svc.pkl','rb'))
-@app.route("/")
-def hello_world():
-    return liver["Gender"][2]
+# Pagination
+@app.route("/<name>")
+def hello_world(name):
+    if name == "breast":
+        return render_template("./Breast.html")
+    if name == "heart":
+        return render_template("./Heart.html")
+    if name == "liver":
+        return render_template("./profile.html")
 
+# Root file of dashboard
+@app.route("/")
+def index():
+    return render_template("./index.html")
+# Login route
+@app.route("/login")
+def login_page():
+    return render_template("./Login/login.html")
+
+# Liver prediction form
 @app.route("/profile")
 def profile_page():
     totalBilirubin=sorted(liver['Total_Bilirubin'].unique())
@@ -19,7 +35,6 @@ def profile_page():
     total_Protiens = sorted(liver['Total_Protiens'].unique())
     albumin = sorted(liver['Albumin'].unique())
     albumin_and_Globulin_Ratio = sorted(liver['Albumin_and_Globulin_Ratio'].unique())
-
     return render_template("index.html",
                         totalBilirubin=totalBilirubin,
                          direct_Bilirubin = direct_Bilirubin,
@@ -30,6 +45,7 @@ def profile_page():
                          albumin = albumin,
                          albumin_and_Globulin_Ratio = albumin_and_Globulin_Ratio
                         )
+# Liver prediction form result
 @app.route("/getData",methods=['POST'])
 def getData():
     age=request.form.get('age')
