@@ -5,47 +5,47 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-  <link rel="stylesheet" href="../../static/style/homenav.css">  
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/homenav.css') }}">
   <title>Document</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="margin-bottom: 0 !important;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 0 !important;">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#" style="color: white;">Navbar</a>
+      <a class="navbar-brand" href="#" style="color: #000;"><img src="{{ logo_img}}" alt="heart" style="width: 250px;height: 40px;"></a>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03" >
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" style="color: white;">Home</a>
+            <a class="nav-link active" aria-current="page" href="#" style="color: #000;">Home</a>
           </li>
           <li class="nav-item" style="height: fit-content;
           margin-top: 8px;
           width: 108px;">
             <div class="dropdown">
               <a class="dropdown-toggle"  id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" 
-              style="text-decoration: none !important; color: white !important; cursor: pointer;"
+              style="text-decoration: none !important; color: #000 !important; cursor: pointer;"
               >
-                Dropdown
+                Diseases
               </a>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <li><a href="/heart" class="dropdown-item" type="button">Heart</a></li>
                 <li><a href="/liver" class="dropdown-item"  >Liver</a></li>
-                <li><a href="/breast" class="dropdown-item"  >Breast</a></li>
+                <!-- <li><a href="/breast" class="dropdown-item"  >Breast</a></li> -->
                 <li><a href="/hypertension" class="dropdown-item"  >HyperTension</a></li>
                 <li><a href="/diabetes" class="dropdown-item">Diabetes</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: white;">About</a>
+            <a class="nav-link" href="#" style="color: #000;">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: white;">Contact</a>
+            <a class="nav-link" href="#" style="color: #000;">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: white;">Help</a>
+            <a class="nav-link" href="#" style="color: #000;">Help</a>
           </li>
    
         </ul>
@@ -55,7 +55,128 @@
  <!-- <div>
   {% block content %} {% endblock %}
 </div> -->
-<img src="{{ user_image }}" alt="heart" style="width: 100%;height: 400px;">
+<img src="{{ user_image }}" alt="heart" style="width: 100%;height: 500px;">
+<div>
+  <div class="cards">
+    <div class="card">
+      <div class="image">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9RSt0LfobmdKrV8wjR_RFrNkjTc114LW6C4HdRWphH6hi5mTt0NCO08hEf8ayYlVwjmI&usqp=CAU"
+        />
+      </div>
+      <div class="details">
+        <div class="center" style="width: 100%">
+          <h1 style="font-size: 25px; font-weight: bold; margin-bottom: 20px">
+            HEART <br /><span style="color: #ff3636; font-size: 25px"
+              >DISEASE</span
+            >
+          </h1>
+          <!-- <p>
+            Lorem ipsum is simple dummy text on the printing and typesetting
+            industry.
+          </p> -->
+          <ul>
+            <li>
+              <a href="/heart"
+                ><i class="fa fa-instagram" aria-hidden="true"></i
+                >Prediction</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Sec -->
+    <div class="card">
+      <div class="image">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9RSt0LfobmdKrV8wjR_RFrNkjTc114LW6C4HdRWphH6hi5mTt0NCO08hEf8ayYlVwjmI&usqp=CAU"
+        />
+      </div>
+      <div class="details">
+        <div class="center" style="width: 100%">
+          <h1 style="font-size: 25px; font-weight: bold; margin-bottom: 20px">
+            LIVER <br /><span style="color: #ff3636; font-size: 25px"
+              >DISEASE</span
+            >
+          </h1>
+          <!-- <p>
+            Lorem ipsum is simple dummy text on the printing and typesetting
+            industry.
+          </p> -->
+          <ul>
+            <li>
+              <a href="/liver"
+                ><i class="fa fa-instagram" aria-hidden="true"></i
+                >Prediction</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Thi -->
+    <div class="card">
+      <div class="image">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9RSt0LfobmdKrV8wjR_RFrNkjTc114LW6C4HdRWphH6hi5mTt0NCO08hEf8ayYlVwjmI&usqp=CAU"
+        />
+      </div>
+      <div class="details">
+        <div class="center" style="width: 100%">
+          <h1 style="font-size: 25px; font-weight: bold; margin-bottom: 20px">
+            HYPER TENSION <br /><span style="color: #ff3636; font-size: 25px"
+              >DISEASE</span
+            >
+          </h1>
+          <!-- <p>
+            Lorem ipsum is simple dummy text on the printing and typesetting
+            industry.
+          </p> -->
+          <ul>
+            <li>
+              <a href="/hypertension"
+                ><i class="fa fa-instagram" aria-hidden="true"></i
+                >Prediction</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Fou -->
+    <div class="card">
+      <div class="image">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9RSt0LfobmdKrV8wjR_RFrNkjTc114LW6C4HdRWphH6hi5mTt0NCO08hEf8ayYlVwjmI&usqp=CAU"
+        />
+      </div>
+      <div class="details">
+        <div class="center" style="width: 100%">
+          <h1 style="font-size: 25px; font-weight: bold; margin-bottom: 20px">
+            DIABETES <br /><span style="color: #ff3636; font-size: 25px"
+              >DISEASE</span
+            >
+          </h1>
+          <!-- <p>
+            Lorem ipsum is simple dummy text on the printing and typesetting
+            industry.
+          </p> -->
+          <ul>
+            <li>
+              <a href="/diabetes"
+                ><i class="fa fa-instagram" aria-hidden="true"></i
+                >Prediction</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 

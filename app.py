@@ -6,7 +6,7 @@ import joblib
 app = Flask(__name__)
 liver = pd.read_csv("indian_liver_patient.csv")
 breast_cancer = pd.read_csv("Breast_Cancer.csv")
-heart_cancer_csv = pd.read_csv("heart.csv")
+heart_cancer_csv = pd.read_csv("heart1.csv")
 hyper_tension_csv = pd.read_csv('FinalData.csv')
 diabetes_csv = pd.read_csv('diabetes.csv')
 
@@ -35,8 +35,10 @@ def hello_world(name):
 # Root file of dashboard
 @app.route("/")
 def index():
-    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'heart.jpg')
-    return render_template("./Home/home.html", user_image = full_filename)
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'webimg.jpg') 
+    logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
+
+    return render_template("./Home/home.html", user_image = full_filename, logo_img = logo_img)
 # Login route
 @app.route("/login")
 def login_page():
@@ -162,72 +164,60 @@ def breast_page():
                         fractal_dimension_worst = fractal_dimension_worst 
                         )
 
-# Heart Prediction 
+# Heart Prediction
+# 'Age', 'Sex', 'ChestPainType', 'RestingBP', 'Cholesterol', 'FastingBS',
+#        'RestingECG', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ST_Slope',
+#        'HeartDisease 
 @app.route("/heart")
 def heart_page():
-    cp=heart_cancer_csv['cp'].unique()
-    trestbps=sorted(heart_cancer_csv['trestbps'].unique())
-    chol=sorted(heart_cancer_csv['chol'].unique())
-    fbs=sorted(heart_cancer_csv['fbs'].unique())
-    restecg=sorted(heart_cancer_csv['restecg'].unique())
-    thalach=sorted(heart_cancer_csv['thalach'].unique())
-    exang=sorted(heart_cancer_csv['exang'].unique())
-    oldpeak=sorted(heart_cancer_csv['oldpeak'].unique())
-    slope=sorted(heart_cancer_csv['slope'].unique())
-    ca=sorted(heart_cancer_csv['ca'].unique())
-    thal=sorted(heart_cancer_csv['thal'].unique())
-    target=sorted(heart_cancer_csv['target'].unique())
-    print(cp,trestbps,chol,"Hearted")
+    Sex=heart_cancer_csv['Sex'].unique()
+    ChestPainType=sorted(heart_cancer_csv['ChestPainType'].unique())
+    RestingECG=sorted(heart_cancer_csv['RestingECG'].unique())
+    ExerciseAngina=sorted(heart_cancer_csv['ExerciseAngina'].unique())
+    ST_Slope=sorted(heart_cancer_csv['ST_Slope'].unique())
+    FastingBS=sorted(heart_cancer_csv['FastingBS'].unique())
+    heartImg = os.path.join(app.config['UPLOAD_FOLDER'], 'heart.jpg')
     return render_template("Heart.html",
-                        cp=cp,
-                        trestbps=trestbps, 
-                        chol=chol, 
-                        fbs=fbs,
-                        restecg=restecg, 
-                        thalach=thalach,
-                        exang=exang, 
-                        oldpeak=oldpeak, 
-                        slope=slope, 
-                        ca=ca, 
-                        thal=thal, 
-                        target=target
+                        Sex=Sex,
+                        ChestPainType=ChestPainType, 
+                        RestingECG=RestingECG, 
+                        ExerciseAngina=ExerciseAngina,
+                        ST_Slope=ST_Slope, 
+                        FastingBS=FastingBS,
+                        heartImg=heartImg
                         )
 
 @app.route("/getHeartPred",methods=['POST'])
-def getHeartData():
-    age=request.form.get('age')
-    sex=request.form.get('sex')
-    cp=request.form.get('cp')
-    trestbps=request.form.get('trestbps')
-    chol=request.form.get('chol')
-    fbs=request.form.get('fbs')
-    restecg=request.form.get('restecg')
-    thalach=request.form.get('thalach')
-    exang=request.form.get('exang')
-    oldpeak=request.form.get('oldpeak')
-    slope=request.form.get('slope')
-    ca=request.form.get('ca')
-    thal=request.form.get('thal')
-    target=request.form.get('target')
-    print(age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,
-                    oldpeak,slope,ca,thal,target)
+def getHeartPred():
+    Age=request.form.get('Age')
+    Sex=request.form.get('Sex')
+    ChestPainType=request.form.get('ChestPainType')
+    RestingBP=request.form.get('RestingBP')
+    Cholesterol=request.form.get('Cholesterol')
+    FastingBS=request.form.get('FastingBS')
+    RestingECG=request.form.get('RestingECG')
+    MaxHR=request.form.get('MaxHR')
+    ExerciseAngina=request.form.get('ExerciseAngina') 
+    Oldpeak=request.form.get('Oldpeak')   
+    ST_Slope=request.form.get('ST_Slope')
+
+    print(Age,Sex,ChestPainType,RestingBP,Cholesterol,FastingBS,RestingECG,MaxHR,ExerciseAngina,
+                    ST_Slope)
     predictionH=heartmodel.predict(pd.DataFrame(
-                    columns=["age","sex","cp","trestbps","chol","fbs","restecg","thalach","exang",
-                    "oldpeak","slope","ca","thal","target"],
-                              data=np.array([age,sex,cp,trestbps,chol,
-                               fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,target
-                              ]).reshape(1, 14)))
-    # prediction=model.predict(age,gender,totalBilirubin,Direct_Bilirubin,alkaline_Phosphotase,
-    #                            alamine_Aminotransferase,total_Protiens,albumin,albumin_and_Globulin_Ratio)
+                    columns=["Age","Sex","ChestPainType","RestingBP","Cholesterol",
+                    "FastingBS","RestingECG","MaxHR","ExerciseAngina",'Oldpeak',
+                    "ST_Slope"],
+                              data=np.array([Age,Sex,ChestPainType,RestingBP,Cholesterol,
+                               FastingBS,RestingECG,MaxHR,ExerciseAngina,Oldpeak,ST_Slope]).reshape(1, 11)))
     print("+++++++++++++++++++++++++++++++++++++++++")
     print(predictionH,"Predict The Modal")
     print("+++++++++++++++++++++++++++++++++++++++++")
-    print("+++++++++++++++++++++++++++++++++++++++++")
-    # condition = str(prediction[0])
-    # if condition == "0":
-    #     return "Not Sick"
-    # elif condition == "1":
-    #     return "Sick"
+    # print("+++++++++++++++++++++++++++++++++++++++++")
+    condition = str(predictionH[0])
+    if condition == "1":
+        return "Yes Diaseas"
+    elif condition == "0":
+        return "No Diaseas"
 # Gender  Age  Severity  BreathShortness  VisualChanges  NoseBleeding
 # Whendiagnoused  Systolic  Diastolic 
 @app.route("/hypertension")

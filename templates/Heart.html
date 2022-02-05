@@ -55,139 +55,110 @@
     <!-- End Navbar -->
 
     <!-- Start Form Tag -->
-    <h1>Heart prediction</h1>
+    <h1 style="text-align: center;">Heart prediction</h1>
+    <div style="display:flex;justify-content:space-around; margin-top: 100px;">
+    <div style="width: 50%;">
+      <img src="{{ heartImg }}" alt="hypertension" style="width: 100%;height: 250px;">
+    </div>
     <form method="post" accept-charset="utf-8" name="Modelform">
-      <div class="col-md-10 form-group" >
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12" >
           <label><b>Enter Age:</b> </label><br>
-          <input type="number" class="form-control" id="age" name="age"
+          <input type="number" class="form-control" id="Age" name="Age"
                  placeholder="Enter Age ">
       </div>
       <!-- Gender -->
-      <div class="col-md-10 form-group" >
+      <div class="col-lg-6 col-md-6 col-sm-12"  >
           <label><b>Enter Gender</b> </label><br>
-          <select class="selectpicker form-control" id="sex" name="sex" required="1"
+          <select class="selectpicker form-control" id="Sex" name="Sex" required="1"
           >
               <option value="1">Male</option>
               <option value="0">Female</option>
           </select>
       </div>
-      <!-- cp -->
-        <!-- onchange="load_car_models(this.id,'car_models')" -->
-      <div class="col-md-10 form-group" >
-          <label><b>Select cp:</b> </label><br>
-          <select class="selectpicker form-control" id="cp" name="cp" required="1"
-          >
-              {% for cps in cp %}
-              <option value="{{ cps }}">{{ cps }}</option>
-              {% endfor %}
-          </select>
-      </div>
-      <div class="col-md-10 form-group" >
-        <label><b>Select trestbps:</b> </label><br>
-        <select class="selectpicker form-control" id="trestbps" name="trestbps" required="1"
+    </div>
+     <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12"  >
+        <label><b>Select ChestPainType:</b> </label><br>
+        <select class="selectpicker form-control" id="ChestPainType" name="ChestPainType" required="1"
         >
-            {% for tstbps in trestbps %}
-            <option value="{{ tstbps }}">{{ tstbps }}</option>
-            {% endfor %}
+            <option value="0">ASY</option>
+            <option value="1">ATA</option>
+            <option value="2">NAP</option>
+            <option value="3">TA</option>
         </select>
     </div>
-    <div class="col-md-10 form-group" >
-      <label><b>Select chol:</b> </label><br>
-      <select class="selectpicker form-control" id="chol" name="chol" required="1"
-      >
-          {% for chols in chol %}
-          <option value="{{ chols }}">{{ chols }}</option>
-          {% endfor %}
-      </select>
+    <div class="col-lg-6 col-md-6 col-sm-12"  >
+      <label><b>Enter RestingBP:</b> </label><br>
+      <input type="number" class="form-control" id="RestingBP" name="RestingBP"
+             placeholder="Enter RestingBP">
   </div>
-  <div class="col-md-10 form-group" >
-    <label><b>Select fbs:</b> </label><br>
-    <select class="selectpicker form-control" id="fbs" name="fbs" required="1"
+     </div>
+ <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12"  >
+      <label><b>Enter Cholesterol:</b> </label><br>
+      <input type="number" class="form-control" id="Cholesterol" name="Cholesterol"
+                   placeholder="Enter Cholesterol">
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12"  >
+    <label><b>Select FastingBS:</b> </label><br>
+    <select class="selectpicker form-control" id="FastingBS" name="FastingBS" required="1"
     >
-        {% for fbss in fbs %}
-        <option value="{{ fbss }}">{{ fbss }}</option>
+        {% for fstbs in FastingBS %}
+        <option value="{{ fstbs }}">{{ fstbs }}</option>
         {% endfor %}
     </select>
+  </div>
 </div>
-<div class="col-md-10 form-group" >
-  <label><b>Select restecg:</b> </label><br>
-  <select class="selectpicker form-control" id="restecgs" name="restecg" required="1"
-  >
-      {% for restecgs in restecg %}
-      <option value="{{ restecgs }}">{{ restecgs }}</option>
-      {% endfor %}
-  </select>
+  <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12"  >
+        <label><b>Select RestingECG:</b> </label><br>
+        <select class="selectpicker form-control" id="RestingECG" name="RestingECG" required="1"
+        >
+            <option value="0">LVH</option>
+            <option value="1">Normal</option>
+            <option value="2">ST</option>
+        </select>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12"  >
+      <label><b>Enter MaxHR:</b> </label><br>
+      <input type="number" class="form-control" id="MaxHR" name="MaxHR"
+                   placeholder="Enter MaxHR">
+  </div>
 </div>
-<div class="col-md-10 form-group" >
-  <label><b>Select thalach:</b> </label><br>
-  <select class="selectpicker form-control" id="thalach" name="thalach" required="1"
-  >
-      {% for thalachs in thalach %}
-      <option value="{{ thalachs }}">{{ thalachs }}</option>
-      {% endfor %}
-  </select>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+    <label><b>Select ExerciseAngina:</b> </label><br>
+    <select class="selectpicker form-control" id="ExerciseAngina" name="ExerciseAngina" required="1"
+    >
+        <option value="0">N</option>
+        <option value="1">Y</option>
+    </select>
 </div>
-<div class="col-md-10 form-group" >
-  <label><b>Select exang:</b> </label><br>
-  <select class="selectpicker form-control" id="exang" name="exang" required="1"
-  >
-      {% for exangs in exang %}
-      <option value="{{ exangs }}">{{ exangs }}</option>
-      {% endfor %}
-  </select>
+<div class="col-lg-6 col-md-6 col-sm-12"  >
+  <label><b>Enter Oldpeak:</b> </label><br>
+  <input type="number" class="form-control" id="Oldpeak" name="Oldpeak"
+  placeholder="Enter MaxHR">
 </div>
-
-<div class="col-md-10 form-group" >
-  <label><b>Select oldpeak:</b> </label><br>
-  <select class="selectpicker form-control" id="oldpeak" name="oldpeak" required="1"
-  >
-      {% for oldpeaks in oldpeak %}
-      <option value="{{ oldpeaks }}">{{ oldpeaks }}</option>
-      {% endfor %}
-  </select>
 </div>
-<div class="col-md-10 form-group" >
-  <label><b>Select slope:</b> </label><br>
-  <select class="selectpicker form-control" id="slope" name="slope" required="1"
-  >
-      {% for slopes in slope %}
-      <option value="{{ slopes }}">{{ slopes }}</option>
-      {% endfor %}
-  </select>
-</div>
-
-<div class="col-md-10 form-group" >
-  <label><b>Select ca:</b> </label><br>
-  <select class="selectpicker form-control" id="ca" name="ca" required="1"
-  >
-      {% for cas in ca %}
-      <option value="{{ cas }}">{{ cas }}</option>
-      {% endfor %}
-  </select>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+    <label><b>Select ST_Slope:</b> </label><br>
+    <select class="selectpicker form-control" id="ST_Slope" name="ST_Slope" required="1"
+    >
+        <option value="0">Down</option>
+        <option value="1">Flat</option>
+        <option value="2">Up</option>
+    </select>
+  </div>
+  
+  <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center; margin-top: 20px;">
+    <button  class="btn btn-primary form-control" onclick="send_data()" >Predict</button>
+  </div>
 </div>
 
-<div class="col-md-10 form-group" >
-  <label><b>Select thal:</b> </label><br>
-  <select class="selectpicker form-control" id="thal" name="thal" required="1"
-  >
-      {% for thals in thal %}
-      <option value="{{ thals }}">{{ thals }}</option>
-      {% endfor %}
-  </select>
-</div>
-<div class="col-md-10 form-group" >
-  <label><b>Select target:</b> </label><br>
-  <select class="selectpicker form-control" id="target" name="target" required="1"
-  >
-      {% for targets in target %}
-      <option value="{{ targets }}">{{ targets }}</option>
-      {% endfor %}
-  </select>
-</div>
-<div class="col-md-10 form-group" style="text-align: center">
-  <button  class="btn btn-primary form-control" onclick="send_data()" >Predict</button>
-</div>
     </form>
+  </div>
     <br>
     <div class="row">
         <div class="col-12" style="text-align: center">
