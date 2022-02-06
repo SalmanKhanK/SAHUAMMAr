@@ -54,107 +54,150 @@
       </nav>
       <!-- End Nav Here -->
 <!-- Start Form Tag -->
-<form method="post" accept-charset="utf-8" name="Modelform">
-  <!-- <div class="col-md-10 form-group" >
-      <label><b>Enter Age:</b> </label><br>
-      <input type="number" class="form-control" id="age" name="age"
-             placeholder="Enter Age ">
-  </div> -->
-  <!-- Diagnose -->
-  <div class="col-md-10 form-group" >
-      <label><b>Enter diagnosis</b> </label><br>
-      <select class="selectpicker form-control" id="diagnosis" name="diagnosis" required="1"
-      >
-          <option value="M">M</option>
-          <option value="B">B</option>
-      </select>
+<h1>Here is Breast Cancer Prediction</h1>
+<div style="display:flex;justify-content:space-around; margin-top: 100px;">
+  <div style="width: 50%;">
+    <img src="{{ brCancerImg }}" alt="hypertension" style="width: 100%;height: 250px;">
   </div>
+<form method="post" accept-charset="utf-8" name="Modelform">
+  <!-- Diagnose -->
   <!-- radius_mean -->
     <!-- onchange="load_car_models(this.id,'car_models')" -->
-  <div class="col-md-10 form-group" >
-      <label><b>Select radius_mean:</b> </label><br>
-      <select class="selectpicker form-control" id="radius_mean" name="radius_mean" required="1"
-      >
-          {% for radiusmean in radius_mean %}
-          <option value="{{ radiusmean }}">{{ radiusmean }}</option>
-          {% endfor %}
-      </select>
+    <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12"  >
+      <label><b>Enter id:</b> </label><br>
+      <input type="number" class="form-control" id="id" name="id"
+      placeholder="Enter id ">
   </div>
-  <!-- 	texture_mean -->
-  <div class="col-md-10 form-group" >
-      <label><b>Select texture_mean:</b> </label><br>
-      <select class="selectpicker form-control" id="Direct_Bilirubin" name="Direct_Bilirubin" required="1"
-      >
-          {% for texturemean in texture_mean %}
-          <option value="{{ texturemean }}">{{ texturemean }}</option>
-          {% endfor %}
-      </select>
+  <div class="col-lg-6 col-md-6 col-sm-12"  >
+      <label><b>Enter radius_mean:</b> </label><br>
+      <input type="number" class="form-control" id="radius_mean" name="radius_mean"
+      placeholder="Enter radius_mean ">
   </div>
+</div>
   <!-- perimeter_mean -->
-  <div class="col-md-10 form-group" >
-      <label><b>Select perimeter_mean:</b> </label><br>
-      <select class="selectpicker form-control" id="alkaline_Phosphotase" name="alkaline_Phosphotase" required="1"
-      >
-          {% for perimetermean in perimeter_mean %}
-          <option value="{{ perimetermean }}">{{ perimetermean }}</option>
-          {% endfor %}
-      </select>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+      <label><b>Enter perimeter_mean:</b> </label><br>
+      <input type="number" class="form-control" id="perimeter_mean" name="perimeter_mean"
+      placeholder="Enter perimeter_mean">
   </div>
-  <div class="col-md-10 form-group" >
-      <label><b>Select area_mean:</b> </label><br>
-      <select class="selectpicker form-control" id="alamine_Aminotransferase" name="alamine_Aminotransferase" required="1"
-      >
-          {% for areamean in area_mean %}
-          <option value="{{ areamean }}">{{ areamean }}</option>
-          {% endfor %}
-      </select>
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+      <label><b>Enter area_mean:</b> </label><br>
+      <input type="number" class="form-control" id="area_mean" name="area_mean"
+      placeholder="Enter area_mean">
   </div>
-  <!-- aspartate_Aminotransferase -->
-  <!-- <div class="col-md-10 form-group" >
-      <label><b>Select the aspartate_Aminotransferase:</b> </label><br>
-      <select class="selectpicker form-control" id="aspartate_Aminotransferase" name="aspartate_Aminotransferase" required="1"
-      >
-          {% for aspartateaminotransferase in aspartate_Aminotransferase %}
-          <option value="{{ aspartateaminotransferase }}">{{ aspartateaminotransferase }}</option>
-          {% endfor %}
-      </select>
-  </div> -->
-  <!-- total_Protiens -->
-  <!-- <div class="col-md-10 form-group" >
-      <label><b>Select the total_Protiens:</b> </label><br>
-      <select class="selectpicker form-control" id="total_Protiens" name="total_Protiens" required="1"
-      >
-          {% for totalprotiens in total_Protiens %}
-          <option value="{{ totalprotiens }}">{{ totalprotiens }}</option>
-          {% endfor %}
-      </select>
-  </div> -->
-  <!-- albumin -->
-  <!-- <div class="col-md-10 form-group" >
-      <label><b>Select the albumin:</b> </label><br>
-      <select class="selectpicker form-control" id="albumin" name="albumin" required="1"
-      >
-          {% for album in albumin %}
-          <option value="{{ album }}">{{ album }}</option>
-          {% endfor %}
-      </select>
+</div>
+<div class="row"> 
+  <div class="col-lg-6 col-md-6 col-sm-12">
+    <label><b>Enter smoothness_mean:</b> </label><br>
+    <input type="number" class="form-control" id="smoothness_mean" name="smoothness_mean"
+    placeholder="Enter smoothness_mean">
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12">
+  <label><b>Enter concavity_mean:</b> </label><br>
+  <input type="number" class="form-control" id="concavity_mean" name="concavity_mean"
+  placeholder="Enter concavity_mean">
+</div>
+</div>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+    <label><b>Enter concave points_mean:</b> </label><br>
+    <input type="number" class="form-control" id="concave points_mean" name="concave points_mean"
+    placeholder="Enter concave points_mean">
   </div>
-  <div class="col-md-10 form-group" >
-      <label><b>Select the albumin_and_Globulin_Ratio:</b> </label><br>
-      <select class="selectpicker form-control" id="albumin_and_Globulin_Ratio" name="albumin_and_Globulin_Ratio" required="1"
-      >
-          {% for albuminAndGlobulinRatio in albumin_and_Globulin_Ratio %}
-          <option value="{{ albuminAndGlobulinRatio }}">{{ albuminAndGlobulinRatio }}</option>
-          {% endfor %}
-      </select>
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+    <label><b>Enter symmetry_mean:</b> </label><br>
+    <input type="number" class="form-control" id="symmetry_mean" name="symmetry_mean"
+    placeholder="Enter symmetry_mean">
   </div>
-  <div class="col-md-10 form-group" style="text-align: center">
-      <button  class="btn btn-primary form-control" onclick="send_data()" >Predict Price</button>
-  </div> -->
-</form>
+</div>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+    <label><b>Enter area_se:</b> </label><br>
+    <input type="number" class="form-control" id="area_se" name="area_se"
+    placeholder="Enter area_se">
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+    <label><b>Enter radius_worst:</b> </label><br>
+    <input type="number" class="form-control" id="radius_worst" name="radius_worst"
+    placeholder="Enter radius_worst">
+  </div>
+</div>
+<div class="row"> 
+  <div class="col-lg-6 col-md-6 col-sm-12"  >
+    <label><b>Enter perimeter_worst:</b> </label><br>
+    <input type="number" class="form-control" id="perimeter_worst" name="perimeter_worst"
+    placeholder="Enter perimeter_worst">
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12"  >
+    <label><b>Enter area_worst:</b> </label><br>
+    <input type="number" class="form-control" id="area_worst" name="area_worst"
+    placeholder="Enter area_worst">
+  </div>
+</div>
 
-    <h1>Here is Breast Cancer Prediction</h1>
-   
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12"  >
+    <label><b>Enter area_worst:</b> </label><br>
+    <input type="number" class="form-control" id="smoothness_worst" name="smoothness_worst"
+    placeholder="Enter smoothness_worst">
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+    <label><b>Enter concavity_worst:</b> </label><br>
+    <input type="number" class="form-control" id="concavity_worst" name="concavity_worst"
+    placeholder="Enter concavity_worst">
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+    <label><b>Enter concave points_worst:</b> </label><br>
+    <input type="number" class="form-control" id="concave points_worst" name="concave points_worst"
+    placeholder="Enter concave points_worst">
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12" >
+    <label><b>Enter symmetry_worst:</b> </label><br>
+    <input type="number" class="form-control" id="symmetry_worst" name="symmetry_worst"
+    placeholder="Enter symmetry_worst">
+  </div>
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center;margin-top: 20px;">
+  <button  class="btn btn-primary form-control" onclick="send_data()" >Predict</button>
+</div>
+</form>
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center">
+        <h4><span id="prediction"></span></h4>
+    </div>
+</div>
+<script>
+    function form_handler(event) {
+ event.preventDefault(); // Don't submit the form normally
+    }
+function send_data(){
+ var form = document.querySelector('form').addEventListener("submit",form_handler);
+ console.log(form,"form")
+ var fd=new FormData(document.querySelector('form'));
+
+  var xhr= new XMLHttpRequest({mozSystem: true});
+
+ xhr.open('POST','/getBreastPred',true);
+ document.getElementById('prediction').innerHTML="Wait! Prediction.....";
+ xhr.onreadystatechange = function(){
+     if(xhr.readyState == XMLHttpRequest.DONE){
+         document.getElementById('prediction').innerHTML="Prediction:"+xhr.responseText;
+
+     }
+ };
+ xhr.onload= function(){};
+ xhr.send(fd);
+}
+</script>
+
+</form>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>

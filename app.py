@@ -11,10 +11,10 @@ hyper_tension_csv = pd.read_csv('FinalData.csv')
 diabetes_csv = pd.read_csv('diabetes.csv')
 
 model=joblib.load(open('liver-svc.pkl','rb'))
-breastmodel=joblib.load(open('breast-cancer-logreg.pkl','rb'))
 heartmodel=joblib.load(open('heart-decTree.pkl','rb'))
 hypertension_model=joblib.load(open('hyper-ten-svc.pkl','rb'))
 diabetes_model=joblib.load(open('diabetes-logreg.pkl','rb'))
+breastcancer_model=joblib.load(open('breast-cancer.pkl','rb'))
 
 PEOPLE_FOLDER = os.path.join('static', 'images')
 app.config['UPLOAD_FOLDER'] = PEOPLE_FOLDER
@@ -39,6 +39,24 @@ def index():
     logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
 
     return render_template("./Home/home.html", user_image = full_filename, logo_img = logo_img)
+
+@app.route("/about")
+def about():
+    logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
+    about_big_img = os.path.join(app.config['UPLOAD_FOLDER'], 'about-big-img.jpg')
+    four_top_img = os.path.join(app.config['UPLOAD_FOLDER'], 'four-top-img.jpg')
+    four_bottom_img = os.path.join(app.config['UPLOAD_FOLDER'], 'four-bottom-img.jpg')
+    footer = os.path.join(app.config['UPLOAD_FOLDER'], 'footer.jpg')
+
+    return render_template("./about.html", 
+    logo_img=logo_img,
+    about_big_img = about_big_img, 
+    four_top_img = four_top_img,
+    four_bottom_img=four_bottom_img,
+    footer=footer
+
+    
+    )
 # Login route
 @app.route("/login")
 def login_page():
@@ -96,78 +114,54 @@ def getData():
 #Breast Cancer Prediction 
 @app.route("/breast")
 def breast_page():
-    id=sorted(breast_cancer['id'].unique())
-    diagnosis=breast_cancer['diagnosis'].unique()
-    radius_mean=sorted(breast_cancer['radius_mean'].unique())
-    texture_mean = sorted(breast_cancer['texture_mean'].unique())
-    perimeter_mean = sorted(breast_cancer['perimeter_mean'].unique())
-    area_mean = sorted(breast_cancer['area_mean'].unique())
-    smoothness_mean = sorted(breast_cancer['smoothness_mean'].unique())
-    compactness_mean = sorted(breast_cancer['compactness_mean'].unique())
-    concavity_mean = sorted(breast_cancer['concavity_mean'].unique())
-    concave_points_mean = sorted(breast_cancer['concave points_mean'].unique())
-    symmetry_mean = sorted(breast_cancer['symmetry_mean'].unique())
-    fractal_dimension_mean = sorted(breast_cancer['fractal_dimension_mean'].unique())
-    radius_se = sorted(breast_cancer['radius_se'].unique())
-    texture_se = sorted(breast_cancer['texture_se'].unique())
-    perimeter_se = sorted(breast_cancer['perimeter_se'].unique())
-    area_se = sorted(breast_cancer['area_se'].unique())
-    smoothness_se = sorted(breast_cancer['smoothness_se'].unique())
-    compactness_se = sorted(breast_cancer['compactness_se'].unique())
-    concavity_se = sorted(breast_cancer['concavity_se'].unique())
-    concave_points_se = sorted(breast_cancer['concave points_se'].unique())
-    symmetry_se = sorted(breast_cancer['symmetry_se'].unique())
-    fractal_dimension_se = sorted(breast_cancer['fractal_dimension_se'].unique())
-    radius_worst = sorted(breast_cancer['radius_worst'].unique())
-    texture_worst = sorted(breast_cancer['texture_worst'].unique())
-    perimeter_worst = sorted(breast_cancer['perimeter_worst'].unique())
-    area_worst = sorted(breast_cancer['area_worst'].unique())
-    smoothness_worst = sorted(breast_cancer['smoothness_worst'].unique())
-    compactness_worst = sorted(breast_cancer['compactness_worst'].unique())
-    concavity_worst = sorted(breast_cancer['concavity_worst'].unique())
-    concave_points_worst = sorted(breast_cancer['concave points_worst'].unique())
-    symmetry_worst = sorted(breast_cancer['symmetry_worst'].unique())
-    fractal_dimension_worst = sorted(breast_cancer['fractal_dimension_worst'].unique())
-    print(diagnosis,"Diagonosis")
-    return render_template("Breast.html",
-                        id=id,
-                        diagnosis=diagnosis,
-                        radius_mean=radius_mean,
-                        texture_mean= texture_mean,
-                        perimeter_mean = perimeter_mean,
-                        area_mean = area_mean,
-                        smoothness_mean = smoothness_mean,
-                        compactness_mean = compactness_mean,
-                        concavity_mean = concavity_mean,
-                        concave_points_mean = concave_points_mean,
-                        symmetry_mean = symmetry_mean,
-                        fractal_dimension_mean = fractal_dimension_mean,
-                        radius_se = radius_se,
-                        texture_se = texture_se,
-                        perimeter_se = perimeter_se,
-                        area_se = area_se,
-                        smoothness_se = smoothness_se,
-                        compactness_se = compactness_se,
-                        concavity_se = concavity_se,
-                        concave_points_se = concave_points_se,
-                        symmetry_se = symmetry_se,
-                        fractal_dimension_se = fractal_dimension_se,
-                        radius_worst = radius_worst,
-                        texture_worst = texture_worst,
-                        perimeter_worst = perimeter_worst,
-                        area_worst = area_worst,
-                        smoothness_worst = smoothness_worst,
-                        compactness_worst = compactness_worst,
-                        concavity_worst = concavity_worst,
-                        concave_points_worst = concave_points_worst,
-                        symmetry_worst = symmetry_worst,
-                        fractal_dimension_worst = fractal_dimension_worst 
-                        )
+    brCancerImg = os.path.join(app.config['UPLOAD_FOLDER'], 'heart.jpg')
+    return render_template("Breast.html",brCancerImg=brCancerImg)
 
 # Heart Prediction
-# 'Age', 'Sex', 'ChestPainType', 'RestingBP', 'Cholesterol', 'FastingBS',
-#        'RestingECG', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ST_Slope',
-#        'HeartDisease 
+# id', 'diagnosis', 'radius_mean', 'perimeter_mean', 'area_mean',
+#        'smoothness_mean', 'concavity_mean', 'concave points_mean',
+#        'symmetry_mean', 'area_se', 'radius_worst', 'perimeter_worst',
+#        'area_worst', 'smoothness_worst', 'concavity_worst',
+#        'concave points_worst', 'symmetry_worst
+@app.route("/getBreastPred",methods=['POST'])
+def getBreastPred():
+    id=request.form.get('id')
+    radius_mean=request.form.get('radius_mean')
+    perimeter_mean=request.form.get('perimeter_mean')
+    area_mean=request.form.get('area_mean')
+    smoothness_mean=request.form.get('smoothness_mean')
+    concavity_mean=request.form.get('concavity_mean')
+    concave_points_mean=request.form.get('concave points_mean')
+    symmetry_mean=request.form.get('symmetry_mean')
+    area_se=request.form.get('area_se') 
+    radius_worst=request.form.get('radius_worst')   
+    perimeter_worst=request.form.get('perimeter_worst')
+    area_worst=request.form.get('area_worst')   
+    smoothness_worst=request.form.get('smoothness_worst')
+    concavity_worst=request.form.get('concavity_worst')
+    concave_points_worst=request.form.get('concave points_worst')   
+    symmetry_worst=request.form.get('symmetry_worst')
+    print("++++++++++++++++++++++++++++++++++++++++++++")
+    print(id,radius_mean,perimeter_mean,area_mean,smoothness_mean,concavity_mean,
+    concave_points_mean,symmetry_mean,area_se,radius_worst,perimeter_worst,area_worst,
+    smoothness_worst,concavity_worst,concave_points_worst,symmetry_worst)
+    predictionBr=breastcancer_model.predict(pd.DataFrame(
+                    columns=["id","radius_mean","perimeter_mean","area_mean","smoothness_mean",
+                    "concavity_mean","concave_points_mean","symmetry_mean","area_se",'radius_worst',
+                    "perimeter_worst","area_worst","smoothness_worst","concavity_worst","concave_points_worst","symmetry_worst"],
+                              data=np.array([id,radius_mean,perimeter_mean,area_mean,
+                              smoothness_mean,concavity_mean,
+                               concave_points_mean,symmetry_mean,area_se,radius_worst,perimeter_worst,area_worst,
+                               smoothness_worst,concavity_worst,concave_points_worst,symmetry_worst]).reshape(1, 16)))
+    print("+++++++++++++++++++++++++++++++++++++++++")
+    print(predictionBr,"Predict The Modal")
+    print("+++++++++++++++++++++++++++++++++++++++++")
+    condition = str(predictionBr[0])
+    if condition == "1":
+        return "Breast Cancer"
+    elif condition == "0":
+        return "No Breast Cancer"
+
 @app.route("/heart")
 def heart_page():
     Sex=heart_cancer_csv['Sex'].unique()
