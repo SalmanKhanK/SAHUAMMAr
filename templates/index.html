@@ -4,71 +4,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/models.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/about.css') }}">
     <title>Document</title>
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="margin-bottom: 0 !important;">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="#" style="color: white;">Navbar</a>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo03" >
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/" style="color: white;">Home</a>
-              </li>
-              <li class="nav-item" style="height: fit-content;
-              margin-top: 8px;
-              width: 108px;">
-                <div class="dropdown">
-                  <a class="dropdown-toggle"  id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" 
-                  style="text-decoration: none !important; color: white !important; cursor: pointer;"
-                  >
-                    Dropdown
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a href="/heart" class="dropdown-item" type="button">Heart</a></li>
-                    <li><a href="/liver" class="dropdown-item"  >Liver</a></li>
-                    <li><a href="/breast" class="dropdown-item" >Breast</a></li>
-                    <li><a href="/hypertension" class="dropdown-item"  >HyperTension</a></li>
-                    <li><a href="/diabetes" class="dropdown-item">Diabetes</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" style="color: white;">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" style="color: white;">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" style="color: white;">Help</a>
-              </li>
-       
+    <div class="navbar" style="flex-wrap: nowrap !important;">
+      <div class="newlogodiv"> 
+        <img class="newlogo"  src="{{ logo_img  }}" alt="logo" >
+      </div>
+      <div class="right">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+        <ul>
+          <li><a href="/" style="text-decoration: none;color: rgb(112, 112, 112);">Home</a></li>
+          <li>
+            Diseases
+            <i
+              class="fa fa-chevron-circle-down"
+              style="margin-left: 10px"
+              aria-hidden="true"
+            ></i>
+            <ul class="dropdown">
+              <li><a href="/liver" style="text-decoration: none;">Liver Disease</a></li>
+              <hr />
+              <li><a href="/breast" style="text-decoration: none;">Breast Cancer</a></li>
+              <hr />
+              <li><a href="/hypertension" style="text-decoration: none;">Hypertension</a></li>
+              <hr />
+              <li><a href="/heart" style="text-decoration: none;">Heart Disease</a></li>
+              <hr/>
+              <li><a href="/diabetes" style="text-decoration: none;">diabetes</a></li>
+              <hr />
+              <li><a href="/symptom" style="text-decoration: none;">symtoms</a></li>
             </ul>
-          </div>
-        </div>
-      </nav>
+          </li>
+          <li><a href="/about" style="text-decoration: none;color: rgb(112, 112, 112);">About Us</a></li>
+          <li><a href="/contact" style="text-decoration: none;color: rgb(112, 112, 112);">Contact Us&nbsp;&nbsp;→</a></li>
+        </ul>
+      </div>
+    </div>
       <!-- End Navbar -->
-    <h1 style="text-align: center;">Liver</h1>
-    <div style="display:flex;justify-content:space-around; margin-top: 100px;">
-        <div style="width: 50%;">
-            <img src="{{ liverImg }}" alt="hypertension" style="width: 100%;height: 250px;">
-          </div>
-    <div>
-    <form method="post" accept-charset="utf-8" name="Modelform">
+    <h1 style="margin-left:65px;margin-top: 50px;">Liver</h1>
+    <div class="mid-div">
+      <div class="mid-left">
+        <img src="{{ liverImg }}" alt="hypertension">
+      </div>
+    <form method="post" accept-charset="utf-8" name="Modelform" class="mid-right">
         <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12" >
-            <label><b>Enter Age:</b> </label><br>
+            <label class="form-label"><b>Enter Age:</b> </label><br>
             <input type="number" class="form-control" id="age" name="age"
                    placeholder="Enter Age ">
         </div>
         <!-- Gender -->
         <div class="col-lg-6 col-md-6 col-sm-12" >
-            <label><b>Enter Gender</b> </label><br>
+            <label class="form-label"><b>Enter Gender</b> </label><br>
             <select class="selectpicker form-control" id="gender" name="gender" required="1"
             >
                 <option value="1">Male</option>
@@ -80,13 +72,13 @@
           <!-- onchange="load_car_models(this.id,'car_models')" -->
           <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12" >
-            <label><b>Select the bilirubin:</b> </label><br>
+            <label class='form-label'><b>Select the bilirubin:</b> </label><br>
             <input type="number" class="form-control" id="totalBilirubin" name="totalBilirubin"
             placeholder="Enter totalBilirubin ">
         </div>
         <!-- 	Direct_Bilirubin -->
         <div class="col-lg-6 col-md-6 col-sm-12" >
-            <label><b>Select the direct_Bilirubin:</b> </label><br>
+            <label class='form-label'><b>Select the direct_Bilirubin:</b> </label><br>
             <input type="number" class="form-control" id="Direct_Bilirubin" name="Direct_Bilirubin"
             placeholder="Enter Direct_Bilirubin">
         </div>
@@ -94,12 +86,12 @@
         <!-- alkaline_Phosphotase -->
         <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12" >
-            <label><b>Select the alkaline_Phosphotase:</b> </label><br>
+            <label class='form-label'><b>Select the alkaline_Phosphotase:</b> </label><br>
             <input type="number" class="form-control" id="alkaline_Phosphotase" name="alkaline_Phosphotase"
             placeholder="Enter alkaline_Phosphotase">
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12" >
-            <label><b>alamine_Aminotransferase:</b> </label><br>
+            <label class='form-label'><b>alamine_Aminotransferase:</b> </label><br>
        
             <input type="number" class="form-control" id="alamine_Aminotransferase" name="alamine_Aminotransferase"
             placeholder="Enter alamine_Aminotransferase">
@@ -108,13 +100,13 @@
         <!-- aspartate_Aminotransferase -->
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12"  >
-            <label><b>aspartate_Aminotransferase:</b> </label><br>
+            <label class='form-label'><b>aspartate_Aminotransferase:</b> </label><br>
             <input type="number" class="form-control" id="aspartate_Aminotransferase" name="aspartate_Aminotransferase"
             placeholder="Enter aspartate_Aminotransferase">
         </div>
         <!-- total_Protiens -->
         <div class="col-lg-6 col-md-6 col-sm-12"  >
-            <label><b>Select the total_Protiens:</b> </label><br>
+            <label class='form-label'><b>Select the total_Protiens:</b> </label><br>
             <input type="number" class="form-control" id="total_Protiens" name="total_Protiens"
             placeholder="Enter total_Protiens">
         </div>
@@ -122,12 +114,12 @@
         <!-- albumin -->
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <label><b>Select the albumin:</b> </label><br>
+            <label class='form-label'><b>Select the albumin:</b> </label><br>
             <input type="number" class="form-control" id="albumin" name="albumin"
             placeholder="Enter albumin">
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <label><b>albumin_and_Globulin_Ratio:</b> </label><br>
+            <label class='form-label'><b>albumin_and_Globulin_Ratio:</b> </label><br>
             <input type="number" class="form-control" id="albumin_and_Globulin_Ratio" name="albumin_and_Globulin_Ratio"
             placeholder="Enter albumin_and_Globulin_Ratio">
         </div>

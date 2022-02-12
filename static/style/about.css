@@ -70,7 +70,7 @@ body {
 
 .right > ul > li:last-child {
   border: 2px solid rgba(49, 101, 163, 1);
-  padding: 10px 10px;
+  padding: 5px 0px;
   border-radius: 20px;
   color: black;
   margin-left: 25px;
@@ -144,11 +144,24 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
-.dropdown > li:hover {
+.dropdown > li:hover a {
   background: white;
-  color: #030e20;
+  color: #030e20 !important;
   padding: 0 10px;
   font-weight: bold;
+}
+
+.dropdown > li a:hover li {
+  background: white;
+  color: #030e20 !important;
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+.dropdown > li > a {
+  color: white !important;
+  transition: all 0.2s linear;
+  width: 100%;
 }
 
 .container {

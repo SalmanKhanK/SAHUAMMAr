@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/models.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/about.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+        <div class="navbar" style="flex-wrap: nowrap !important;">
+          <div class="newlogodiv"> 
+            <img class="newlogo"  src="{{ logo_img  }}" alt="logo" >
+          </div>
+          <div class="right">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+            <ul>
+              <li><a href="/" style="text-decoration: none;color: rgb(112, 112, 112);">Home</a></li>
+              <li>
+                Diseases
+                <i
+                  class="fa fa-chevron-circle-down"
+                  style="margin-left: 10px"
+                  aria-hidden="true"
+                ></i>
+                <ul class="dropdown">
+                  <li><a href="/liver" style="text-decoration: none;">Liver Disease</a></li>
+                  <hr />
+                  <li><a href="/breast" style="text-decoration: none;">Breast Cancer</a></li>
+                  <hr />
+                  <li><a href="/hypertension" style="text-decoration: none;">Hypertension</a></li>
+                  <hr />
+                  <li><a href="/heart" style="text-decoration: none;">Heart Disease</a></li>
+                  <hr/>
+                  <li><a href="/diabetes" style="text-decoration: none;">diabetes</a></li>
+                  <hr />
+                  <li><a href="/symptom" style="text-decoration: none;">symtoms</a></li>
+                </ul>
+              </li>
+              <li><a href="/about" style="text-decoration: none;color: rgb(112, 112, 112);">About Us</a></li>
+              <li><a href="/contact" style="text-decoration: none;color: rgb(112, 112, 112);">Contact Us&nbsp;&nbsp;→</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- End Navbar -->
+        <h1 style="margin-left:65px;margin-top: 50px;">Symptoms</h1>
+        <div class="mid-div">
+          <div class="mid-left">
+            <img src="{{ DiabImg }}" alt="hypertension" >
+          </div>
+          <form method="post" accept-charset="utf-8" name="Modelform" class="mid-right">
+           <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" form-group >
+                <label class='form-label'><b>Symptom_1</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_1" name="Symptom_1" required="1"
+                >
+                {% for symptom1 in Symptom_1 %}
+                <option value="{{ symptom1 }}">{{ symptom1 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <!-- Gender -->
+            <div class="col-lg-6 col-md-6 col-sm-12" form-group >
+                <label class='form-label'><b>Symptom_2</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_2" name="Symptom_2" required="1"
+                >
+                {% for symptom2 in Symptom_2 %}
+                <option value="{{ symptom2 }}">{{ symptom2 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_2</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_3" name="Symptom_3" required="1"
+                >
+                {% for symptom3 in Symptom_3 %}
+                <option value="{{ symptom3 }}">{{ symptom3 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_4</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_4" name="Symptom_4" required="1"
+                >
+                {% for symptom4 in Symptom_4 %}
+                <option value="{{ symptom4 }}">{{ symptom4 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_5</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_5" name="Symptom_5" required="1"
+                >
+                {% for symptom5 in Symptom_5 %}
+                <option value="{{ symptom5 }}">{{ symptom5 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_6</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_6" name="Symptom_6" required="1"
+                >
+                {% for symptom6 in Symptom_6 %}
+                <option value="{{ symptom6 }}">{{ symptom6 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_7</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_7" name="Symptom_7" required="1"
+                >
+                {% for symptom7 in Symptom_7 %}
+                <option value="{{ symptom7 }}">{{ symptom7 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_8</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_8" name="Symptom_8" required="1"
+                >
+                {% for symptom8 in Symptom_8 %}
+                <option value="{{ symptom8 }}">{{ symptom8 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_9</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_9" name="Symptom_9" required="1"
+                >
+                {% for symptom9 in Symptom_9 %}
+                <option value="{{ symptom9 }}">{{ symptom9 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_10</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_10" name="Symptom_10" required="1"
+                >
+                {% for symptom10 in Symptom_10 %}
+                <option value="{{ symptom10 }}">{{ symptom10 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_11</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_11" name="Symptom_11" required="1"
+                >
+                {% for symptom11 in Symptom_11 %}
+                <option value="{{ symptom11 }}">{{ symptom11 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_12</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_12" name="Symptom_12" required="1"
+                >
+                {% for symptom12 in Symptom_12 %}
+                <option value="{{ symptom12 }}">{{ symptom12 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_13</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_13" name="Symptom_13" required="1"
+                >
+                {% for symptom13 in Symptom_13 %}
+                <option value="{{ symptom13 }}">{{ symptom13 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_14</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_14" name="Symptom_14" required="1"
+                >
+                {% for symptom14 in Symptom_14 %}
+                <option value="{{ symptom14 }}">{{ symptom14 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_15</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_15" name="Symptom_15" required="1"
+                >
+                {% for symptom15 in Symptom_15 %}
+                <option value="{{ symptom15 }}">{{ symptom15 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_16</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_16" name="Symptom_16" required="1"
+                >
+                {% for symptom16 in Symptom_16 %}
+                <option value="{{ symptom16 }}">{{ symptom16 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" >
+                <label class='form-label'><b>Symptom_17</b> </label><br>
+                <select class="selectpicker form-control" id="Symptom_17" name="Symptom_17" required="1"
+                >
+                {% for symptom17 in Symptom_17 %}
+                <option value="{{ symptom17 }}">{{ symptom17 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center;margin-top: 20px;">
+                <button  class="btn btn-primary form-control" onclick="send_data()" >Predict</button>
+            </div>
+          </div>
+            </form>
+          </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center">
+                    <h4><span id="prediction"></span></h4>
+                </div>
+            </div>
+            <script>
+                function form_handler(event) {
+             event.preventDefault(); // Don't submit the form normally
+                }
+            function send_data(){
+             var form = document.querySelector('form').addEventListener("submit",form_handler);
+             console.log(form,"form")
+             var fd=new FormData(document.querySelector('form'));
+     
+              var xhr= new XMLHttpRequest({mozSystem: true});
+     
+             xhr.open('POST','/getSymptomsPred',true);
+             document.getElementById('prediction').innerHTML="Wait! Prediction.....";
+             xhr.onreadystatechange = function(){
+                 if(xhr.readyState == XMLHttpRequest.DONE){
+                     document.getElementById('prediction').innerHTML="Prediction:"+xhr.responseText;
+     
+                 }
+             };
+             xhr.onload= function(){};
+             xhr.send(fd);
+            }
+         </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>

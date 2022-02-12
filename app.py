@@ -4,17 +4,20 @@ import numpy as np
 import os
 import joblib
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 liver = pd.read_csv("indian_liver_patient.csv")
 breast_cancer = pd.read_csv("Breast_Cancer.csv")
 heart_cancer_csv = pd.read_csv("heart1.csv")
 hyper_tension_csv = pd.read_csv('FinalData.csv')
 diabetes_csv = pd.read_csv('diabetes.csv')
+symptom_csv = pd.read_csv('dataset.csv')
 
 model=joblib.load(open('liver-svc.pkl','rb'))
 heartmodel=joblib.load(open('heart-decTree.pkl','rb'))
 hypertension_model=joblib.load(open('hyper-ten-svc.pkl','rb'))
 diabetes_model=joblib.load(open('diabetes-logreg.pkl','rb'))
 breastcancer_model=joblib.load(open('breast-cancer.pkl','rb'))
+symptoms_model=joblib.load(open('symptom-lr.pkl','rb'))
 
 PEOPLE_FOLDER = os.path.join('static', 'images')
 app.config['UPLOAD_FOLDER'] = PEOPLE_FOLDER
@@ -31,14 +34,22 @@ def hello_world(name):
         return render_template("./Hypertension.html")
     if name == "diabetes":
         return render_template("./Diabetes.html")
+    if name == "symptom":
+        return render_template("./Symptoms.html")
 
 # Root file of dashboard
 @app.route("/")
 def index():
-    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'webimg.jpg') 
+    webimg = os.path.join(app.config['UPLOAD_FOLDER'], 'webimg.jpg')  
     logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
-
-    return render_template("./Home/home.html", user_image = full_filename, logo_img = logo_img)
+    mid_img = os.path.join(app.config['UPLOAD_FOLDER'], 'mid.jpeg')
+    heartpp = os.path.join(app.config['UPLOAD_FOLDER'], 'heartpp.PNG')
+    liverpp = os.path.join(app.config['UPLOAD_FOLDER'], 'liverpp.PNG') 
+    hyperpp = os.path.join(app.config['UPLOAD_FOLDER'], 'hyperpp.PNG')
+    footer = os.path.join(app.config['UPLOAD_FOLDER'], 'footer.jpg')
+    return render_template("./Home/home.html", 
+    webimg = webimg, logo_img = logo_img, mid_img=mid_img, heartpp=heartpp, liverpp=liverpp,
+    hyperpp=hyperpp,  footer=footer)
 
 @app.route("/about")
 def about():
@@ -54,9 +65,16 @@ def about():
     four_top_img = four_top_img,
     four_bottom_img=four_bottom_img,
     footer=footer
+)
+@app.route("/contact")
+def contact():
+    logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
+    footer = os.path.join(app.config['UPLOAD_FOLDER'], 'footer.jpg')
 
-    
-    )
+    return render_template("./contact.html", 
+    logo_img=logo_img,
+    footer=footer
+)
 # Login route
 @app.route("/login")
 def login_page():
@@ -73,7 +91,8 @@ def profile_page():
     total_Protiens = sorted(liver['Total_Protiens'].unique())
     albumin = sorted(liver['Albumin'].unique())
     albumin_and_Globulin_Ratio = sorted(liver['Albumin_and_Globulin_Ratio'].unique())
-    liverImg = os.path.join(app.config['UPLOAD_FOLDER'], 'heart.jpg')
+    liverImg = os.path.join(app.config['UPLOAD_FOLDER'], 'liver.jpg')
+    logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
     return render_template("index.html",
                         totalBilirubin=totalBilirubin,
                          direct_Bilirubin = direct_Bilirubin,
@@ -84,6 +103,7 @@ def profile_page():
                          albumin = albumin,
                          albumin_and_Globulin_Ratio = albumin_and_Globulin_Ratio,
                          liverImg=liverImg,
+                         logo_img=logo_img
                         )
 # Liver prediction form result
 @app.route("/getData",methods=['POST'])
@@ -114,8 +134,9 @@ def getData():
 #Breast Cancer Prediction 
 @app.route("/breast")
 def breast_page():
-    brCancerImg = os.path.join(app.config['UPLOAD_FOLDER'], 'heart.jpg')
-    return render_template("Breast.html",brCancerImg=brCancerImg)
+    brCancerImg = os.path.join(app.config['UPLOAD_FOLDER'], 'Breast-Cancer.png')
+    logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
+    return render_template("Breast.html",brCancerImg=brCancerImg,logo_img=logo_img)
 
 # Heart Prediction
 # id', 'diagnosis', 'radius_mean', 'perimeter_mean', 'area_mean',
@@ -170,7 +191,8 @@ def heart_page():
     ExerciseAngina=sorted(heart_cancer_csv['ExerciseAngina'].unique())
     ST_Slope=sorted(heart_cancer_csv['ST_Slope'].unique())
     FastingBS=sorted(heart_cancer_csv['FastingBS'].unique())
-    heartImg = os.path.join(app.config['UPLOAD_FOLDER'], 'heart.jpg')
+    heartImg = os.path.join(app.config['UPLOAD_FOLDER'], 'heart-disease-logo-new.jpg')
+    logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
     return render_template("Heart.html",
                         Sex=Sex,
                         ChestPainType=ChestPainType, 
@@ -178,7 +200,8 @@ def heart_page():
                         ExerciseAngina=ExerciseAngina,
                         ST_Slope=ST_Slope, 
                         FastingBS=FastingBS,
-                        heartImg=heartImg
+                        heartImg=heartImg,
+                        logo_img=logo_img
                         )
 
 @app.route("/getHeartPred",methods=['POST'])
@@ -209,9 +232,9 @@ def getHeartPred():
     # print("+++++++++++++++++++++++++++++++++++++++++")
     condition = str(predictionH[0])
     if condition == "1":
-        return "Yes Diaseas"
+        return "Yes"
     elif condition == "0":
-        return "No Diaseas"
+        return "No"
 # Gender  Age  Severity  BreathShortness  VisualChanges  NoseBleeding
 # Whendiagnoused  Systolic  Diastolic 
 @app.route("/hypertension")
@@ -223,7 +246,8 @@ def hypertension_page():
     Whendiagnoused=sorted(hyper_tension_csv['Whendiagnoused'].unique())
     Systolic=sorted(hyper_tension_csv['Systolic'].unique())
     Diastolic=sorted(hyper_tension_csv['Diastolic'].unique())
-    hypertensionImg = os.path.join(app.config['UPLOAD_FOLDER'], 'hypertension.jpg')
+    hypertensionImg = os.path.join(app.config['UPLOAD_FOLDER'], 'hypertensionnew.jpg')
+    logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
     print(Severity,BreathShortness,"HYper")
     return render_template("Hypertension.html",
                     Severity=Severity, 
@@ -234,6 +258,7 @@ def hypertension_page():
                     Systolic=Systolic,  
                     Diastolic=Diastolic,
                     hypertensionImg=hypertensionImg,
+                    logo_img =logo_img 
                 )
 
 @app.route("/getHyperPred",methods=['POST'])
@@ -255,11 +280,14 @@ def getHyperPred():
                               data=np.array([Gender,Age,Severity,BreathShortness,VisualChanges,
                                NoseBleeding,Whendiagnoused,Systolic,Diastolic]).reshape(1, 9)))
     print("+++++++++++++++++++++++++++++++++++++++++")
-    condition = str(predictionHy[0])
-    if condition == "0":
-        return "Not Sick"
-    elif condition == "1":
-        return "Sick"
+    try:
+        condition = str(predictionHy[0])
+        if condition == "0":
+            return "High blood pressure"
+        elif condition == "1":
+            return "Normal blood pressure"
+    except:
+        return "something went wrong"
 
 @app.route("/diabetes")
 def diabetes_page():
@@ -270,8 +298,9 @@ def diabetes_page():
     # Insulin=sorted(diabetes_csv['Insulin'].unique())
     # BMI=sorted(diabetes_csv['BMI'].unique())
     # DiabetesPedigreeFunction=sorted(diabetes_csv['DiabetesPedigreeFunction'].unique())
-    DiabImg = os.path.join(app.config['UPLOAD_FOLDER'], 'hypertension.jpg')
-    return render_template("Diabetes.html",DiabImg=DiabImg)
+    DiabImg = os.path.join(app.config['UPLOAD_FOLDER'], 'blog-diabetes.png')
+    logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
+    return render_template("Diabetes.html",DiabImg=DiabImg, logo_img=logo_img)
 @app.route("/getDiabetesPred",methods=['POST'])
 def getDiabetesPred():
     Age=request.form.get('Age')
@@ -295,8 +324,84 @@ def getDiabetesPred():
     print(condition)
     print("++++++++++++++++++++++++++++++++++++++++")
     if condition == "0":
-        return "NO"
+        return "Diasease Diagnosed"
     elif condition == "1":
-        return "Yes"
+        return "Disease Not Diagnosed"
+@app.route("/symptom")
+def symptoms_page():
+    Symptom_1=symptom_csv['Symptom_1'].unique()
+    Symptom_2=symptom_csv['Symptom_2'].unique()
+    Symptom_3=symptom_csv['Symptom_3'].unique()
+    Symptom_4=symptom_csv['Symptom_4'].unique()
+    Symptom_5=symptom_csv['Symptom_5'].unique()
+    Symptom_6=symptom_csv['Symptom_6'].unique()
+    Symptom_7=symptom_csv['Symptom_7'].unique()
+    Symptom_8=symptom_csv['Symptom_8'].unique()
+    Symptom_9=symptom_csv['Symptom_9'].unique()
+    Symptom_10=symptom_csv['Symptom_10'].unique()
+    Symptom_11=symptom_csv['Symptom_11'].unique()
+    Symptom_12=symptom_csv['Symptom_12'].unique()
+    Symptom_13=symptom_csv['Symptom_13'].unique()
+    Symptom_14=symptom_csv['Symptom_14'].unique()
+    Symptom_15=symptom_csv['Symptom_15'].unique()
+    Symptom_16=symptom_csv['Symptom_16'].unique()
+    Symptom_17=symptom_csv['Symptom_17'].unique()
+    # DiabImg = os.path.join(app.config['UPLOAD_FOLDER'], 'blog-diabetes.png')
+    logo_img = os.path.join(app.config['UPLOAD_FOLDER'], 'final-logo.PNG')
+    return render_template("Symptoms.html",logo_img=logo_img,
+                       Symptom_1=Symptom_1,
+                       Symptom_2=Symptom_2,
+                       Symptom_3=Symptom_3,
+                       Symptom_4=Symptom_4,
+                       Symptom_5=Symptom_5,
+                       Symptom_6=Symptom_6,
+                       Symptom_7=Symptom_7,
+                       Symptom_8=Symptom_8,
+                       Symptom_9=Symptom_9,
+                       Symptom_10=Symptom_10,
+                       Symptom_11=Symptom_11,
+                       Symptom_12=Symptom_12,
+                       Symptom_13=Symptom_13,
+                       Symptom_14=Symptom_14,
+                       Symptom_15=Symptom_15,
+                       Symptom_16=Symptom_16,
+                       Symptom_17=Symptom_17,
+                       )
+@app.route("/getSymptomsPred",methods=['POST'])
+def getSymptomsPred():
+    Symptom_1=request.form.get('Symptom_1')
+    Symptom_2=request.form.get('Symptom_2')
+    Symptom_3=request.form.get('Symptom_3')
+    Symptom_4=request.form.get('Symptom_4')
+    Symptom_5=request.form.get('Symptom_5')
+    Symptom_6=request.form.get('Symptom_6')
+    Symptom_7=request.form.get('Symptom_7')
+    Symptom_8=request.form.get('Symptom_8')
+    Symptom_9=request.form.get('Symptom_9')
+    Symptom_10=request.form.get('Symptom_10')
+    Symptom_11=request.form.get('Symptom_11')
+    Symptom_12=request.form.get('Symptom_12')
+    Symptom_13=request.form.get('Symptom_13')
+    Symptom_14=request.form.get('Symptom_14')
+    Symptom_15=request.form.get('Symptom_15')
+    Symptom_16=request.form.get('Symptom_16')
+    Symptom_17=request.form.get('Symptom_17')
+    print("+++++++++++++++++++++++++++++++++++++++++")
+    print(Symptom_1,Symptom_2,Symptom_3,Symptom_4,Symptom_5,Symptom_6,Symptom_7,
+    Symptom_8,Symptom_9,Symptom_10,Symptom_11,Symptom_12,Symptom_13,Symptom_14,Symptom_15,Symptom_16,Symptom_17)
+    print("+++++++++++++++++++++++++++++++++++++++++")
+    predictionSymptoms=symptoms_model.predict(pd.DataFrame(
+                    columns=["Symptom_1","Symptom_2","Symptom_3","Symptom_4",
+                    "Symptom_5","Symptom_6","Symptom_7","Symptom_8","Symptom_9",
+                    "Symptom_10","Symptom_11","Symptom_12","Symptom_13","Symptom_14",
+                    "Symptom_15","Symptom_16","Symptom_17",
+                    ],
+                    data=np.array([Symptom_1,Symptom_2,Symptom_3,Symptom_4,Symptom_5,Symptom_6,
+                    Symptom_7,Symptom_8,Symptom_9,Symptom_10,Symptom_11,Symptom_12,Symptom_13,
+                    Symptom_14,Symptom_15,Symptom_16,Symptom_17]).reshape(1, 17)))
+    print("+++++++++++++++++++++++++++++++++++++++++")
+    print(predictionSymptoms)
+    print("++++++++++++++++++++++++++++++++++++++++")
+    return ''
 if __name__ == "__main__":
     app.run(debug=True,port=8000)
