@@ -146,7 +146,7 @@ def breast_page():
 #        'concave points_worst', 'symmetry_worst
 @app.route("/getBreastPred",methods=['POST'])
 def getBreastPred():
-    id=request.form.get('id')
+    # id=request.form.get('id')
     radius_mean=request.form.get('radius_mean')
     perimeter_mean=request.form.get('perimeter_mean')
     area_mean=request.form.get('area_mean')
@@ -167,13 +167,13 @@ def getBreastPred():
     concave_points_mean,symmetry_mean,area_se,radius_worst,perimeter_worst,area_worst,
     smoothness_worst,concavity_worst,concave_points_worst,symmetry_worst)
     predictionBr=breastcancer_model.predict(pd.DataFrame(
-                    columns=["id","radius_mean","perimeter_mean","area_mean","smoothness_mean",
+                    columns=["radius_mean","perimeter_mean","area_mean","smoothness_mean",
                     "concavity_mean","concave_points_mean","symmetry_mean","area_se",'radius_worst',
                     "perimeter_worst","area_worst","smoothness_worst","concavity_worst","concave_points_worst","symmetry_worst"],
-                              data=np.array([id,radius_mean,perimeter_mean,area_mean,
+                              data=np.array([radius_mean,perimeter_mean,area_mean,
                               smoothness_mean,concavity_mean,
                                concave_points_mean,symmetry_mean,area_se,radius_worst,perimeter_worst,area_worst,
-                               smoothness_worst,concavity_worst,concave_points_worst,symmetry_worst]).reshape(1, 16)))
+                               smoothness_worst,concavity_worst,concave_points_worst,symmetry_worst]).reshape(1, 15)))
     print("+++++++++++++++++++++++++++++++++++++++++")
     print(predictionBr,"Predict The Modal")
     print("+++++++++++++++++++++++++++++++++++++++++")
